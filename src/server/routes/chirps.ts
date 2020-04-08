@@ -39,7 +39,7 @@ router.put('/:chirpid', async (req, res) => {
 	const chirp = req.body;
 	const chirpid = Number(req.params.chirpid);
 	try {
-		const result = await db.chirps.update(chirp, chirpid);
+		const result = await db.chirps.update(chirp.message, chirpid);
 		res.json({ msg: `Chirp $"{chirpid} Updated`, result});
 	} catch (error) {
 		console.log(error);
