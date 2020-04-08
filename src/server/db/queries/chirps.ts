@@ -9,11 +9,9 @@ interface IChirpsT {
 	username: string;
 }
 
-const all = () => Query<IChirpsT[]>('SELECT chirps.*, users.username FROM chirps JOIN users ON users.id = chirps.userid ORDER BY chirps.id');
+const all = () => Query<IChirpsT[]>('SELECT chirps.*, users.username FROM chirps JOIN users ON users.id = chirps.userid ORDER BY chirps.id DESC');
 
 const one = (id: number) => Query<IChirpsT[]>('SELECT chirps.*, users.username FROM chirps JOIN users ON users.id = chirps.userid WHERE chirps.id = ?', [id]);
-
-// const one = (id: number) => Query<IChirpsT[]>('SELECT * FROM chirps WHERE id = ?', [id]);
 
 const insert = (userid: number, message: string) => Query<{ insertId: number }>('INSERT INTO chirps (userid, message) VALUE (?)', [[userid, message]]);
 
